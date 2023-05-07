@@ -1,17 +1,17 @@
-use nfl;
-show tables;
+USE nfl;
+SHOW TABLES;
 
-desc conference;
-desc divisions;
-desc teams;
+DESC conference;
+DESC divisions;
+DESC teams;
 
 #Subquery simples com SELECT
-select t.name as nome, t.id_division as divisao
-from teams as t
-where t.id_division = 
-(select d.id
-from divisions as d
-where d.name = 'NFC WEST' 
+SELECT t.name AS nome, t.id_division AS divisao
+FROM teams AS t
+WHERE t.id_division = 
+(SELECT d.id
+FROM divisions AS d
+WHERE d.name = 'NFC WEST' 
 );
 
 #Subquery com Insert
@@ -19,14 +19,12 @@ CREATE TABLE sb_champs(
 	name varchar(45) primary key,
     total_titles int
 );
-desc sb_champs;
+DESC sb_champs;
 
 INSERT INTO sb_champs
 (SELECT t.name as nome, t.sb_titles as total_titulos
-from teams as t
-where t.sb_titles >= 1
+FROM teams as t
+WHERE t.sb_titles >= 1
 );
-select * from sb_champs
-order by total_titles DESC;
-
-
+SELECT * FROM sb_champs
+ORDER BY total_titles DESC;
